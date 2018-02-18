@@ -3,8 +3,6 @@ using Microsoft.Web.Administration;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace IISManager.ViewModels
@@ -18,21 +16,8 @@ namespace IISManager.ViewModels
         private ServerManager _serverManager;
         private Application _application;
         private ApplicationPool _applicationPool;
-
-        public ApplicationManagerViewModel(
-            ServerManager serverManager,
-            Application application)
-        {
-            _serverManager = serverManager;
-            _application = application;
-            _applicationPool = 
-                _serverManager.
-                ApplicationPools.
-                SingleOrDefault(appPool => appPool.Name == _application.ApplicationPoolName);
-            Info = new ApplicationInfo(_application, _applicationPool);
-        }
+        
         public ApplicationInfo Info { get; set; }
-
         public ICommand OnAppPoolStartButtonClickedEventHandler
         {
             get
@@ -47,7 +32,6 @@ namespace IISManager.ViewModels
                 }));
             }
         }
-
         public ICommand OnAppPoolStopButtonClickedEventHandler
         {
             get
@@ -62,7 +46,6 @@ namespace IISManager.ViewModels
                 }));
             }
         }
-
         public ICommand OnAppPoolRecycleButtonClickedEventHandler
         {
             get
@@ -74,65 +57,75 @@ namespace IISManager.ViewModels
             }
         }
 
-        public class ApplicationInfo : INotifyPropertyChanged
+        public ApplicationManagerViewModel(
+            ServerManager serverManager,
+            Application application)
         {
-            Application _application;
-            ApplicationPool _applicationPool;
-            public event PropertyChangedEventHandler PropertyChanged;
+            _serverManager = serverManager;
+            _application = application;
+            _applicationPool =
+                _serverManager.
+                ApplicationPools.
+                SingleOrDefault(appPool => appPool.Name == _application.ApplicationPoolName);
+            Info = new ApplicationInfo(_application, _applicationPool);
+        }        
+    }
 
-            private void NotifyPropertyChanged(string propertyName)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-            public ApplicationInfo(Application application, ApplicationPool applicationPool)
-            {
-                _application = application;
-                _applicationPool = applicationPool;
-            }
-            
-            public string ApplicationName
-            {
-                get
-                {
-                    return _application.Schema.Name;
-                }
-            }
+    public class ApplicationInfo : INotifyPropertyChanged
+    {
+        private Application _application;
+        private ApplicationPool _applicationPool;
 
-            public string ApplicationPoolName
+        public event PropertyChangedEventHandler PropertyChanged;
+        public string ApplicationName
+        {
+            get
             {
-                get
-                {
-                    return _application.ApplicationPoolName;
-                }
+                return _application.Schema.Name;
             }
+        }
+        public string ApplicationPoolName
+        {
+            get
+            {
+                return _application.ApplicationPoolName;
+            }
+        }
+        public string ApplicationPoolStatus
+        {
+            get
+            {
+                return _applicationPool.State.ToString();
+            }
+            set
+            {
+                NotifyPropertyChanged(nameof(ApplicationPoolStatus));
+            }
+        }
+        public string EnabledProtocols
+        {
+            get
+            {
+                return _application.EnabledProtocols;
+            }
+        }
+        public IEnumerable<string> VirtualDirectories
+        {
+            get
+            {
+                return _application.VirtualDirectories.Select(vd => vd.PhysicalPath);
+            }
+        }
 
-            public string ApplicationPoolStatus
-            {
-                get
-                {
-                    return _applicationPool.State.ToString();
-                }
-                set
-                {
-                    NotifyPropertyChanged(nameof(ApplicationPoolStatus));
-                }
-            }
+        public ApplicationInfo(Application application, ApplicationPool applicationPool)
+        {
+            _application = application;
+            _applicationPool = applicationPool;
+        }
 
-            public string EnabledProtocols
-            {
-                get
-                {
-                    return _application.EnabledProtocols;
-                }
-            }
-
-            public IEnumerable<string> VirtualDirectories
-            {
-                get
-                {
-                    return _application.VirtualDirectories.Select(vd => vd.PhysicalPath);
-                }
-            }
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

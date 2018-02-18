@@ -61,7 +61,6 @@
       <DependentUpon>ApplicationManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\CommandExecutor.cs" />
-    <Compile Include="Models\SiteData.cs" />
     <Compile Include="SiteManager.xaml.cs">
       <DependentUpon>SiteManager.xaml</DependentUpon>
     </Compile>
@@ -114,6 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

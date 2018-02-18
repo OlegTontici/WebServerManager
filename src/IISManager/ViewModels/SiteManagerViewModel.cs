@@ -12,14 +12,14 @@ namespace IISManager.ViewModels
         private ICommand onSiteStartButtonClickedEventHandler;
         private ICommand onSiteStopButtonClickedEventHandler;
         private ICommand onSiteRestartButtonClickedEventHandler;
+
         private string status;
         private ServerManager _serverManager;
         private Site _site;
+
         public IEnumerable<ApplicationManagerViewModel> SiteApplications { get; set; }
         public int SelectedApplicationIndex { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         public string Status
         {
             get { return status; }
@@ -28,23 +28,11 @@ namespace IISManager.ViewModels
                 status = value;
                 NotifyPropertyChanged(nameof(Status));
             }
-        }
-        
+        }        
         public string SiteName
         {
             get { return _site.Name; }
         }
-
-        public SiteManagerViewModel(ServerManager serverManager, Site site)
-        {
-            _serverManager = serverManager;
-            _site = site;
-            SiteApplications = _site.Applications.Select(app => new ApplicationManagerViewModel(_serverManager, app));
-            Status = _site.State.ToString();
-            SelectedApplicationIndex = 0;
-        }
-
-
         public ICommand OnSiteStartButtonClickedEventHandler
         {
             get
@@ -55,7 +43,6 @@ namespace IISManager.ViewModels
                 }));
             }
         }
-
         public ICommand OnSiteStopButtonClickedEventHandler
         {
             get
@@ -66,7 +53,6 @@ namespace IISManager.ViewModels
                 }));
             }
         }
-
         public ICommand OnSiteRestartButtonClickedEventHandler
         {
             get
@@ -78,6 +64,15 @@ namespace IISManager.ViewModels
                 }));
             }
         }
+
+        public SiteManagerViewModel(ServerManager serverManager, Site site)
+        {
+            _serverManager = serverManager;
+            _site = site;
+            SiteApplications = _site.Applications.Select(app => new ApplicationManagerViewModel(_serverManager, app));
+            Status = _site.State.ToString();
+            SelectedApplicationIndex = 0;
+        }        
 
         private void NotifyPropertyChanged(string propertyName)
         {

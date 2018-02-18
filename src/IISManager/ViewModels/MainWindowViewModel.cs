@@ -12,23 +12,23 @@ namespace IISManager.ViewModels
     {
         private ICommand onResetIISButtonClickEventHandler;
         private ServerManager _serverManager { get; set; }
+
         public IEnumerable<SiteManagerViewModel> SiteManagerViewModels { get; set; }
-
-        public MainWindowViewModel()
-        {
-            _serverManager = new ServerManager();
-            SiteManagerViewModels = _serverManager.Sites.Select(s => new SiteManagerViewModel(_serverManager, s));
-        }        
-
         public ICommand OnResetIISButtonClickEventHandler
         {
             get
             {
-                return onResetIISButtonClickEventHandler ?? (onResetIISButtonClickEventHandler = new CommandExecutor(() => 
+                return onResetIISButtonClickEventHandler ?? (onResetIISButtonClickEventHandler = new CommandExecutor(() =>
                 {
                     Process.Start("iisreset.exe");
                 }));
             }
         }
+
+        public MainWindowViewModel()
+        {
+            _serverManager = new ServerManager();
+            SiteManagerViewModels = _serverManager.Sites.Select(s => new SiteManagerViewModel(_serverManager, s));
+        } 
     }
 }

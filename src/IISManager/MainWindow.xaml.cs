@@ -1,9 +1,4 @@
-﻿using Microsoft.Web.Administration;
-using System.Windows;
-using System.Linq;
-using System.Collections.Generic;
-using IISManager.Models;
-using System.Diagnostics;
+﻿using System.Windows;
 using IISManager.ViewModels;
 
 namespace IISManager

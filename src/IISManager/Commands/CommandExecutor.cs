@@ -5,8 +5,10 @@ namespace IISManager.Commands
 {
     public class CommandExecutor : ICommand
     {
-        public event EventHandler CanExecuteChanged;
         private Action _action;
+        
+        public event EventHandler CanExecuteChanged;
+
         public CommandExecutor(Action action)
         {
             _action = action;
