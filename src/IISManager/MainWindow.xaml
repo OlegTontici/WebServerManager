@@ -1,0 +1,36 @@
+﻿<Window x:Class="IISManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IISManager"
+        mc:Ignorable="d"
+        Title="MainWindow" MinWidth="900" MinHeight="600" Width="900" Height="600" WindowStartupLocation="CenterScreen">
+
+    <Grid x:Name="RootContainer">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="IIS">
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+                <Button Content="Reset IIS" Grid.Row="0" Command="{Binding OnResetIISButtonClickEventHandler}" Margin="5"/>
+                <Separator Grid.Row="0" VerticalAlignment="Bottom"/>
+                <ListBox SelectedIndex="0" x:Name="SitesList" Grid.Row="1" Height="Auto" BorderThickness="0" ItemsSource="{Binding SiteManagerViewModels}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding SiteName}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </GroupBox>
+        <Grid Grid.Column="1">
+            <local:SiteManager DataContext="{Binding ElementName=SitesList, Path=SelectedItem}"/>
+        </Grid>
+    </Grid>
+</Window>
