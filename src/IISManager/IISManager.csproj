@@ -61,6 +61,7 @@
       <DependentUpon>ApplicationManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\CommandExecutor.cs" />
+    <Compile Include="Converters\ParrentToChildWidthConverter.cs" />
     <Compile Include="SiteManager.xaml.cs">
       <DependentUpon>SiteManager.xaml</DependentUpon>
     </Compile>

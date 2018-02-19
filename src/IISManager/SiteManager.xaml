@@ -17,19 +17,61 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="{Binding Name}" FontSize="14">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Status : "/>
-                <TextBlock Text="{Binding Status}"/>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="Site Management" Grid.Row="1">
-            <StackPanel>
-                <Button Content="Start" Command="{Binding OnSiteStartButtonClickedEventHandler}"/>
-                <Button Content="Stop" Command="{Binding OnSiteStopButtonClickedEventHandler}"/>
-                <Button Content="Restart" Command="{Binding OnSiteRestartButtonClickedEventHandler}"/>
-            </StackPanel>
-        </GroupBox>
+        <GroupBox Header="{Binding SiteName}" FontSize="14">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="Info" Grid.Column="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Status : " Grid.Column="0">
+                            <TextBlock.Inlines>
+                                <TextBlock Text="{Binding Status}"/>
+                            </TextBlock.Inlines>
+                </TextBlock>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Bindings : "/>
+                            <ListView ItemsSource="{Binding Bindings}" BorderThickness="0">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                    <Hyperlink NavigateUri="{Binding}"  RequestNavigate="Hyperlink_RequestNavigate">
+                                        <TextBlock Text="{Binding}"/>
+                                    </Hyperlink>
+                                </TextBlock>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListViewItem">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Management" Grid.Column="1">
+                    <StackPanel>
+                        <Button Content="Start" Command="{Binding OnSiteStartButtonClickedEventHandler}"/>
+                        <Button Content="Stop" Command="{Binding OnSiteStopButtonClickedEventHandler}"/>
+                        <Button Content="Restart" Command="{Binding OnSiteRestartButtonClickedEventHandler}"/>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </GroupBox>        
         <GroupBox Header="Site Applications"  Grid.Row="2">
             <Grid>
                 <Grid.ColumnDefinitions>

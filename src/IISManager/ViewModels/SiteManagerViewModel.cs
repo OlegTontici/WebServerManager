@@ -17,12 +17,16 @@ namespace IISManager.ViewModels
         private ServerManager _serverManager;
         private Site _site;
 
+        public IEnumerable<string> Bindings { get; set; }
         public IEnumerable<ApplicationManagerViewModel> SiteApplications { get; set; }
         public int SelectedApplicationIndex { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public string Status
         {
-            get { return status; }
+            get
+            {
+                return _site.State.ToString(); 
+            }
             set
             {
                 status = value;
@@ -70,8 +74,8 @@ namespace IISManager.ViewModels
             _serverManager = serverManager;
             _site = site;
             SiteApplications = _site.Applications.Select(app => new ApplicationManagerViewModel(_serverManager, app));
-            Status = _site.State.ToString();
             SelectedApplicationIndex = 0;
+            Bindings = _site.Bindings.Select(b => $@"{b.Protocol}://{b.Host}");
         }        
 
         private void NotifyPropertyChanged(string propertyName)

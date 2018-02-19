@@ -4,23 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IISManager"
+             xmlns:converters="clr-namespace:IISManager.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-
+    <UserControl.Resources>
+        <converters:ParrentToChildWidthConverter x:Key="ParrentToChildWidthConverter"/>
+    </UserControl.Resources>
     <GroupBox Header="Application">
         <Grid x:Name="RootContainer">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
-                <GroupBox Header="Pool Management" Grid.Column="0">
+                <GroupBox Header="Pool Management" Grid.Column="1">
                     <StackPanel>
                         <Button Content="Start" Command="{Binding OnAppPoolStartButtonClickedEventHandler}"/>
                         <Button Content="Stop" Command="{Binding OnAppPoolStopButtonClickedEventHandler}"/>
                         <Button Content="Recycle" Command="{Binding OnAppPoolRecycleButtonClickedEventHandler}"/>
                     </StackPanel>
                 </GroupBox>
-            <GroupBox Grid.Column="1" Header="Info">
+            <GroupBox Grid.Column="0" Header="Info">
                 <StackPanel>
                     <TextBlock Text="Application pool name : ">
                         <TextBlock.Inlines>
@@ -37,7 +40,7 @@
                             <TextBlock Text="{Binding Info.EnabledProtocols}"/>
                         </TextBlock.Inlines>
                     </TextBlock>
-                    <StackPanel>
+                    <StackPanel x:Name="VirtualDirsContainer">
                         <TextBlock Text="Virtual directories : "/>
                         <ListView
                             BorderThickness="0" 
@@ -45,7 +48,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock
-                                        MaxWidth="400"
+                                        Width="{Binding ElementName=VirtualDirsContainer, Path=ActualWidth,Converter={StaticResource ParrentToChildWidthConverter}}"
                                         TextWrapping="Wrap" 
                                         Text="{Binding}"/>
                                 </DataTemplate>
