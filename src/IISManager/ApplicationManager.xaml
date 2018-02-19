@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:IISManager"
              xmlns:converters="clr-namespace:IISManager.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             FontSize="14">
     <UserControl.Resources>
         <converters:ParrentToChildWidthConverter x:Key="ParrentToChildWidthConverter"/>
     </UserControl.Resources>
@@ -14,7 +15,7 @@
         <Grid x:Name="RootContainer">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
                 <GroupBox Header="Pool Management" Grid.Column="1">
                     <StackPanel>

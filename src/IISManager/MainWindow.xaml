@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:IISManager"
         mc:Ignorable="d"
         Title="MainWindow" MinWidth="900" MinHeight="600" Width="900" Height="600" WindowStartupLocation="CenterScreen">
-
     <Grid x:Name="RootContainer">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>

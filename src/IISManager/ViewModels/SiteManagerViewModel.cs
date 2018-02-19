@@ -9,6 +9,7 @@ namespace IISManager.ViewModels
 {
     public class SiteManagerViewModel : INotifyPropertyChanged
     {
+        private ICommand onFullRecycleButtonClickedEventHandler;
         private ICommand onSiteStartButtonClickedEventHandler;
         private ICommand onSiteStopButtonClickedEventHandler;
         private ICommand onSiteRestartButtonClickedEventHandler;
@@ -36,6 +37,23 @@ namespace IISManager.ViewModels
         public string SiteName
         {
             get { return _site.Name; }
+        }
+        public ICommand OnFullRecycleButtonClickedEventHandler
+        {
+            get
+            {
+                return onFullRecycleButtonClickedEventHandler ?? (onFullRecycleButtonClickedEventHandler = new CommandExecutor(() =>
+                {
+                    _site.Stop();
+
+                    foreach (var a in _site.Applications)
+                    {
+                        _serverManager.ApplicationPools.Single(appPool => appPool.Name == a.ApplicationPoolName).Recycle();
+                    }
+
+                    _site.Start();
+                }));
+            }
         }
         public ICommand OnSiteStartButtonClickedEventHandler
         {

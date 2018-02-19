@@ -5,11 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IISManager"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" >
-    <UserControl.Resources>
-        <Style TargetType="Button">
-        </Style>
-    </UserControl.Resources>
+             d:DesignHeight="300" d:DesignWidth="300" >    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="130"/>
@@ -21,12 +17,12 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="140"/>
                 </Grid.ColumnDefinitions>
                 <GroupBox Header="Info" Grid.Column="0">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.3*"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Status : " Grid.Column="0">
@@ -81,7 +77,8 @@
                 <ListBox 
                     x:Name="Applications" 
                     ItemsSource="{Binding SiteApplications}" 
-                    SelectedIndex="{Binding SelectedApplicationIndex}">
+                    SelectedIndex="{Binding SelectedApplicationIndex}"
+                    Background="Transparent">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Info.ApplicationName}"/>
@@ -94,6 +91,11 @@
                     DataContext="{Binding ElementName=Applications, Path=SelectedItem}"/>
             </Grid>
         </GroupBox>
-        <Button Content="Full Recycle" Grid.ColumnSpan="2" Grid.Row="3" ToolTip="Stop the site,recycle application pool and start the site"/>
+        <Button
+            Content="Full Recycle"
+            Command="{Binding OnFullRecycleButtonClickedEventHandler}" 
+            Grid.ColumnSpan="2" 
+            Grid.Row="3" 
+            ToolTip="Stop the site,recycle application pool and start the site"/>
     </Grid>
 </UserControl>
