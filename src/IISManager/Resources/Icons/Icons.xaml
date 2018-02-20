@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:IISManager.Resources.Icons">
+    <Rectangle x:Shared="False" x:Key="StopIcon" Width="10" Height="10" Fill="#757575"/>
+    <Path x:Shared="False" x:Key="StartIcon" Fill="#757575" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Path.Data>
+            <PathGeometry>
+                <PathGeometry.Figures>
+                    <PathFigure IsClosed="True">
+                        <LineSegment Point="0,10"/>
+                        <LineSegment Point="10,5"/>
+                    </PathFigure>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
+    <Path x:Key="RestartIcon" Stroke="#757575" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="2">
+        <Path.Data>
+            <GeometryGroup>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure IsClosed="False" StartPoint="5,2">
+                            <ArcSegment  Size="5,5" Point="1,3" IsLargeArc="True" SweepDirection="Clockwise"/>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+                <LineGeometry StartPoint="2,2.2" EndPoint="-3.5,3.7"/>
+                <LineGeometry StartPoint="0.8,1.5" EndPoint="2.4,6.9"/>
+            </GeometryGroup>
+        </Path.Data>
+    </Path>
+
+</ResourceDictionary>

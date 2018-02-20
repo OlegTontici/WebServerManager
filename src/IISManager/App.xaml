@@ -7,6 +7,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/IISManager;component/Resources/Styles/ButtonResources.xaml"/>
+                <ResourceDictionary Source="/IISManager;component/Resources/Icons/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

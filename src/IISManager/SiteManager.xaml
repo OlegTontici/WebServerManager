@@ -61,9 +61,9 @@
                 </GroupBox>
                 <GroupBox Header="Management" Grid.Column="1">
                     <StackPanel>
-                        <Button Content="Start" Command="{Binding OnSiteStartButtonClickedEventHandler}"/>
-                        <Button Content="Stop" Command="{Binding OnSiteStopButtonClickedEventHandler}"/>
-                        <Button Content="Restart" Command="{Binding OnSiteRestartButtonClickedEventHandler}"/>
+                        <Button Height="20" Content="{StaticResource StartIcon}" Command="{Binding OnSiteStartButtonClickedEventHandler}"/>
+                        <Button Height="20" Content="{StaticResource StopIcon}" Command="{Binding OnSiteStopButtonClickedEventHandler}"/>
+                        <Button Height="20" Content="{StaticResource RestartIcon}" Command="{Binding OnSiteRestartButtonClickedEventHandler}"/>
                     </StackPanel>
                 </GroupBox>
             </Grid>

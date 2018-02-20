@@ -19,8 +19,8 @@
             </Grid.ColumnDefinitions>
                 <GroupBox Header="Pool Management" Grid.Column="1">
                     <StackPanel>
-                        <Button Content="Start" Command="{Binding OnAppPoolStartButtonClickedEventHandler}"/>
-                        <Button Content="Stop" Command="{Binding OnAppPoolStopButtonClickedEventHandler}"/>
+                        <Button Height="20" Content="{StaticResource StartIcon}" Command="{Binding OnAppPoolStartButtonClickedEventHandler}"/>
+                        <Button Height="20" Content="{StaticResource StopIcon}" Command="{Binding OnAppPoolStopButtonClickedEventHandler}"/>
                         <Button Content="Recycle" Command="{Binding OnAppPoolRecycleButtonClickedEventHandler}"/>
                     </StackPanel>
                 </GroupBox>
