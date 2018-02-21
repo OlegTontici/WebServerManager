@@ -3,7 +3,6 @@
                     xmlns:local="clr-namespace:IISManager.Resources.Styles">
     <Style TargetType="Button">
         <Setter Property="Background" Value="#BDBDBD"/>
-        <Setter Property="Foreground" Value="#424242"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -12,30 +11,36 @@
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
+                        <!--<EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard Storyboard.TargetName="Bord" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
-                                    <ColorAnimation To="#03A9F4" Duration="0:0:0.5"/>
+                                    <ColorAnimation To="#03A9F4" Duration="0:0:0.3"/>
                                 </Storyboard>
                             </BeginStoryboard>
                             <BeginStoryboard>
                                 <Storyboard Storyboard.TargetName="Bord" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
-                                    <ColorAnimation To="#BDBDBD" Duration="0:0:0.4"/>
+                                    <ColorAnimation To="#BDBDBD" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard>
                                 <Storyboard Storyboard.TargetName="Bord" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
-                                    <ColorAnimation To="#BDBDBD" Duration="0:0:0.5"/>
+                                    <ColorAnimation To="#BDBDBD" Duration="0:0:0.3"/>
                                 </Storyboard>
                             </BeginStoryboard>
                             <BeginStoryboard>
                                 <Storyboard Storyboard.TargetName="Bord" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
-                                    <ColorAnimation To="#03A9F4" Duration="0:0:0.4"/>
+                                    <ColorAnimation To="#03A9F4" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
-                        </EventTrigger>
+                        </EventTrigger>-->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="#757575"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

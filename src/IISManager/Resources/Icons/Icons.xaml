@@ -1,8 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:IISManager.Resources.Icons">
-    <Rectangle x:Shared="False" x:Key="StopIcon" Width="10" Height="10" Fill="#757575"/>
-    <Path x:Shared="False" x:Key="StartIcon" Fill="#757575" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Rectangle 
+        x:Shared="False" 
+        x:Key="StopIcon" 
+        Width="10" 
+        Height="10" 
+        Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground}"/>
+    <Path 
+        x:Shared="False" 
+        x:Key="StartIcon" 
+        Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground}" 
+        VerticalAlignment="Center" 
+        HorizontalAlignment="Center">
         <Path.Data>
             <PathGeometry>
                 <PathGeometry.Figures>
@@ -14,7 +24,12 @@
             </PathGeometry>
         </Path.Data>
     </Path>
-    <Path x:Key="RestartIcon" Stroke="#757575" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="2">
+    <Path 
+        x:Key="RestartIcon" 
+        Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground}" 
+        VerticalAlignment="Center" 
+        HorizontalAlignment="Center" 
+        StrokeThickness="2">
         <Path.Data>
             <GeometryGroup>
                 <PathGeometry>
@@ -26,6 +41,74 @@
                 </PathGeometry>
                 <LineGeometry StartPoint="2,2.2" EndPoint="-3.5,3.7"/>
                 <LineGeometry StartPoint="0.8,1.5" EndPoint="2.4,6.9"/>
+            </GeometryGroup>
+        </Path.Data>
+    </Path>
+
+    <Path x:Key="RecycleIcon" Stroke="#757575" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="1">
+        <Path.Data>
+            <GeometryGroup>
+                <LineGeometry StartPoint="4,10" EndPoint="0,10"/>
+                <LineGeometry StartPoint="0,10" EndPoint="0,3"/>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure StartPoint="0,3">
+                            <BezierSegment Point1="0,-1" Point2="8,-4" Point3="10,6"/>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+                <LineGeometry StartPoint="10,6" EndPoint="8,6.7"/>
+                <LineGeometry StartPoint="8,6.7" EndPoint="12.5,8"/>
+                <LineGeometry StartPoint="12.5,8" EndPoint="15,4.2"/>
+                <LineGeometry StartPoint="15,4.2" EndPoint="13,5"/>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure StartPoint="13,5">
+                            <BezierSegment Point1="11,-5" Point2="4,-2" Point3="4,5"/>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+                <LineGeometry StartPoint="4,5" EndPoint="4,10"/>
+            </GeometryGroup>
+        </Path.Data>
+    </Path>
+
+    <Path 
+        x:Key="RecycleIcon2" 
+        Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground}" 
+        Fill="Red" 
+        VerticalAlignment="Center" 
+        HorizontalAlignment="Center" 
+        StrokeThickness="1">
+        <Path.Data>
+            <GeometryGroup>
+                <LineGeometry StartPoint="0,2" EndPoint="10,2"/>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure StartPoint="10,2">
+                            <BezierSegment Point1="10,2" Point2="10,1" Point3="9,0"/>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+                <LineGeometry StartPoint="9,0" EndPoint="7,0"/>
+                <LineGeometry StartPoint="7,0" EndPoint="7,-1.5"/>
+                <LineGeometry StartPoint="7,-1.5" EndPoint="3,-1.5"/>
+                <LineGeometry StartPoint="3,-1.5" EndPoint="3,0"/>
+                <LineGeometry StartPoint="3,0" EndPoint="1,0"/>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure StartPoint="1,0">
+                            <BezierSegment Point1="0,1" Point2="0,2" Point3="0,2"/>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+                <LineGeometry StartPoint="0,5" EndPoint="10,5"/>
+                <LineGeometry StartPoint="10,5" EndPoint="10,14"/>
+                <LineGeometry StartPoint="10,14" EndPoint="0,14"/>
+                <LineGeometry StartPoint="0,14" EndPoint="0,5"/>
+                <LineGeometry StartPoint="3,7" EndPoint="3,12"/>
+                <LineGeometry StartPoint="5,7" EndPoint="5,12"/>
+                <LineGeometry StartPoint="7,7" EndPoint="7,12"/>
             </GeometryGroup>
         </Path.Data>
     </Path>

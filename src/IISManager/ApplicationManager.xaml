@@ -19,9 +19,9 @@
             </Grid.ColumnDefinitions>
                 <GroupBox Header="Pool Management" Grid.Column="1">
                     <StackPanel>
-                        <Button Height="20" Content="{StaticResource StartIcon}" Command="{Binding OnAppPoolStartButtonClickedEventHandler}"/>
-                        <Button Height="20" Content="{StaticResource StopIcon}" Command="{Binding OnAppPoolStopButtonClickedEventHandler}"/>
-                        <Button Content="Recycle" Command="{Binding OnAppPoolRecycleButtonClickedEventHandler}"/>
+                        <Button Tag="Green" Height="20" Content="{StaticResource StartIcon}" Command="{Binding OnAppPoolStartButtonClickedEventHandler}"/>
+                        <Button Tag="#B71C1C" Height="20" Content="{StaticResource StopIcon}" Command="{Binding OnAppPoolStopButtonClickedEventHandler}"/>
+                        <Button Tag="Black" Height="20" Content="{StaticResource RecycleIcon2}" Command="{Binding OnAppPoolRecycleButtonClickedEventHandler}"/>
                     </StackPanel>
                 </GroupBox>
             <GroupBox Grid.Column="0" Header="Info">

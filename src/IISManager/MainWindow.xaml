@@ -17,7 +17,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-                <Button Content="Reset IIS" Grid.Row="0" Command="{Binding OnResetIISButtonClickEventHandler}" Margin="5"/>
+                <Button Tag="#1976D2" Content="Reset IIS" Grid.Row="0" Command="{Binding OnResetIISButtonClickEventHandler}" Margin="5"/>
                 <Separator Grid.Row="0" VerticalAlignment="Bottom"/>
                 <ListBox SelectedIndex="0" x:Name="SitesList" Grid.Row="1" Height="Auto" BorderThickness="0" ItemsSource="{Binding SiteManagerViewModels}">
                     <ListBox.ItemTemplate>

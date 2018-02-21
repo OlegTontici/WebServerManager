@@ -61,9 +61,9 @@
                 </GroupBox>
                 <GroupBox Header="Management" Grid.Column="1">
                     <StackPanel>
-                        <Button Height="20" Content="{StaticResource StartIcon}" Command="{Binding OnSiteStartButtonClickedEventHandler}"/>
-                        <Button Height="20" Content="{StaticResource StopIcon}" Command="{Binding OnSiteStopButtonClickedEventHandler}"/>
-                        <Button Height="20" Content="{StaticResource RestartIcon}" Command="{Binding OnSiteRestartButtonClickedEventHandler}"/>
+                        <Button Tag="Green" Height="20" Content="{StaticResource StartIcon}" Command="{Binding OnSiteStartButtonClickedEventHandler}"/>
+                        <Button Tag="#B71C1C" Height="20" Content="{StaticResource StopIcon}" Command="{Binding OnSiteStopButtonClickedEventHandler}"/>
+                        <Button Tag="#1976D2" Height="20" Content="{StaticResource RestartIcon}" Command="{Binding OnSiteRestartButtonClickedEventHandler}"/>
                     </StackPanel>
                 </GroupBox>
             </Grid>
@@ -96,6 +96,7 @@
             Command="{Binding OnFullRecycleButtonClickedEventHandler}" 
             Grid.ColumnSpan="2" 
             Grid.Row="3" 
-            ToolTip="Stop the site,recycle application pool and start the site"/>
+            ToolTip="Stop the site,recycle application pool and start the site"
+            Tag="#1976D2"/>
     </Grid>
 </UserControl>
