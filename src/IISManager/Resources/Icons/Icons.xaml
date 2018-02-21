@@ -1,15 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:IISManager.Resources.Icons">
-    <Rectangle 
+    <Rectangle x:Key="StopIcon" 
         x:Shared="False" 
-        x:Key="StopIcon" 
         Width="10" 
         Height="10" 
         Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground}"/>
-    <Path 
+    <Path x:Key="StartIcon" 
         x:Shared="False" 
-        x:Key="StartIcon" 
         Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground}" 
         VerticalAlignment="Center" 
         HorizontalAlignment="Center">
@@ -24,8 +22,7 @@
             </PathGeometry>
         </Path.Data>
     </Path>
-    <Path 
-        x:Key="RestartIcon" 
+    <Path x:Key="RestartIcon" 
         Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground}" 
         VerticalAlignment="Center" 
         HorizontalAlignment="Center" 
@@ -44,8 +41,11 @@
             </GeometryGroup>
         </Path.Data>
     </Path>
-
-    <Path x:Key="RecycleIcon" Stroke="#757575" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="1">
+    <Path x:Key="RecycleIcon" 
+        Stroke="#757575"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center" 
+        StrokeThickness="1">
         <Path.Data>
             <GeometryGroup>
                 <LineGeometry StartPoint="4,10" EndPoint="0,10"/>
@@ -72,9 +72,8 @@
             </GeometryGroup>
         </Path.Data>
     </Path>
-
-    <Path 
-        x:Key="RecycleIcon2" 
+    <Path x:Key="RecycleIcon2" 
+        x:Shared="False"
         Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground}" 
         Fill="Red" 
         VerticalAlignment="Center" 
@@ -112,5 +111,4 @@
             </GeometryGroup>
         </Path.Data>
     </Path>
-
 </ResourceDictionary>
