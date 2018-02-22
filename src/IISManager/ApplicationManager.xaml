@@ -49,11 +49,12 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                         <TextBlock>
-                                            <Hyperlink NavigateUri="{Binding}"  RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="">
+                                            <Hyperlink NavigateUri="{Binding}"  RequestNavigate="Hyperlink_RequestNavigate" MouseRightButtonDown="Hyperlink_MouseRightButtonDown" TextDecorations="">
                                                 <TextBlock
                                                     Width="{Binding ElementName=VirtualDirsContainer, Path=ActualWidth,Converter={StaticResource ParrentToChildWidthConverter}}"
                                                     TextWrapping="Wrap" 
-                                                    Text="{Binding}"/>
+                                                    Text="{Binding}"
+                                                    ToolTip="Left click to open folder,Right click to open folder props"/>
                                             </Hyperlink>
                                         </TextBlock>
                                 </DataTemplate>

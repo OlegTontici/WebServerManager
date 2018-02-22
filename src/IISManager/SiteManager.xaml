@@ -93,6 +93,7 @@
         </GroupBox>
         <Button
             Content="Full Recycle"
+            Height="20"
             Command="{Binding OnFullRecycleButtonClickedEventHandler}" 
             Grid.ColumnSpan="2" 
             Grid.Row="3" 
