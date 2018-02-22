@@ -48,10 +48,14 @@
                             ItemsSource="{Binding Info.VirtualDirectories}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock
-                                        Width="{Binding ElementName=VirtualDirsContainer, Path=ActualWidth,Converter={StaticResource ParrentToChildWidthConverter}}"
-                                        TextWrapping="Wrap" 
-                                        Text="{Binding}"/>
+                                        <TextBlock>
+                                            <Hyperlink NavigateUri="{Binding}"  RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="">
+                                                <TextBlock
+                                                    Width="{Binding ElementName=VirtualDirsContainer, Path=ActualWidth,Converter={StaticResource ParrentToChildWidthConverter}}"
+                                                    TextWrapping="Wrap" 
+                                                    Text="{Binding}"/>
+                                            </Hyperlink>
+                                        </TextBlock>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             <ListView.ItemContainerStyle>
