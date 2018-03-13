@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using IISManager.ViewModels;
 
 namespace IISManager
@@ -10,8 +12,11 @@ namespace IISManager
     {
         public MainWindow()
         {
-            InitializeComponent();            
-            DataContext = new MainWindowViewModel();
+            InitializeComponent();
+            Notification notification = new Notification();
+            Grid.SetColumn(notification, 1);
+            this.RootContainer.Children.Add(notification);
+            DataContext = new MainWindowViewModel(notification);
         }
     }
 }

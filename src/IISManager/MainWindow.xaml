@@ -30,6 +30,6 @@
         </GroupBox>
         <Grid Grid.Column="1">
             <local:SiteManager DataContext="{Binding ElementName=SitesList, Path=SelectedItem}"/>
-        </Grid>
+        </Grid>        
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using IISManager.Commands;
 using Microsoft.Web.Administration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace IISManager.ViewModels
         private string status;
         private ServerManager _serverManager;
         private Site _site;
+        private Notification _notification;
 
         public IEnumerable<string> Bindings { get; set; }
         public IEnumerable<ApplicationManagerViewModel> SiteApplications { get; set; }
@@ -44,14 +46,21 @@ namespace IISManager.ViewModels
             {
                 return onFullRecycleButtonClickedEventHandler ?? (onFullRecycleButtonClickedEventHandler = new CommandExecutor(() =>
                 {
-                    _site.Stop();
 
-                    foreach (var a in _site.Applications)
+                    ExecuteWithNotification(() =>
                     {
-                        _serverManager.ApplicationPools.Single(appPool => appPool.Name == a.ApplicationPoolName).Recycle();
-                    }
+                        _site.Stop();
 
-                    _site.Start();
+                        foreach (var a in _site.Applications)
+                        {
+                            _serverManager.ApplicationPools.Single(appPool => appPool.Name == a.ApplicationPoolName).Recycle();
+                        }
+
+                        _site.Start();
+
+                        Status = string.Empty;
+                    });
+                    
                 }));
             }
         }
@@ -61,7 +70,12 @@ namespace IISManager.ViewModels
             {
                 return onSiteStartButtonClickedEventHandler ?? (onSiteStartButtonClickedEventHandler = new CommandExecutor(() =>
                 {
-                    _site.Start();
+                    ExecuteWithNotification(() =>
+                    {
+                        _site.Start();
+
+                        Status = string.Empty;
+                    });
                 }));
             }
         }
@@ -71,7 +85,12 @@ namespace IISManager.ViewModels
             {
                 return onSiteStopButtonClickedEventHandler ?? (onSiteStopButtonClickedEventHandler = new CommandExecutor(() =>
                 {
-                    _site.Stop();
+                    ExecuteWithNotification(() =>
+                    {
+                        _site.Stop();
+
+                        Status = string.Empty;
+                    });
                 }));
             }
         }
@@ -81,24 +100,41 @@ namespace IISManager.ViewModels
             {
                 return onSiteRestartButtonClickedEventHandler ?? (onSiteRestartButtonClickedEventHandler = new CommandExecutor(() =>
                 {
-                    _site.Stop();
-                    _site.Start();
+                    ExecuteWithNotification(() =>
+                    {
+                        _site.Stop();
+                        _site.Start();
+                    });
                 }));
             }
         }
 
-        public SiteManagerViewModel(ServerManager serverManager, Site site)
+        public SiteManagerViewModel(ServerManager serverManager, Site site, Notification notification)
         {
             _serverManager = serverManager;
             _site = site;
-            SiteApplications = _site.Applications.Select(app => new ApplicationManagerViewModel(_serverManager, app));
+            SiteApplications = _site.Applications.Select(app => new ApplicationManagerViewModel(_serverManager, app, notification));
             SelectedApplicationIndex = 0;
             Bindings = _site.Bindings.Select(b => $@"{b.Protocol}://{b.Host}");
+            _notification = notification;
         }        
 
         private void NotifyPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void ExecuteWithNotification(Action action)
+        {
+            try
+            {
+                action();
+                _notification.ShowSuccess();
+            }
+            catch (Exception ex)
+            {
+                _notification.ShowError(ex.Message);
+            }
         }
     }
 }

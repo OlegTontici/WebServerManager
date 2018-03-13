@@ -11,7 +11,8 @@ namespace IISManager.ViewModels
     public class MainWindowViewModel
     {
         private ICommand onResetIISButtonClickEventHandler;
-        private ServerManager _serverManager { get; set; }
+        private ServerManager _serverManager;
+        private Notification _notification;
 
         public IEnumerable<SiteManagerViewModel> SiteManagerViewModels { get; set; }
         public ICommand OnResetIISButtonClickEventHandler
@@ -21,14 +22,16 @@ namespace IISManager.ViewModels
                 return onResetIISButtonClickEventHandler ?? (onResetIISButtonClickEventHandler = new CommandExecutor(() =>
                 {
                     Process.Start("iisreset.exe");
+                    _notification.ShowSuccess();
                 }));
             }
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(Notification notification)
         {
             _serverManager = new ServerManager();
-            SiteManagerViewModels = _serverManager.Sites.Select(s => new SiteManagerViewModel(_serverManager, s));
+            SiteManagerViewModels = _serverManager.Sites.Select(s => new SiteManagerViewModel(_serverManager, s,notification));
+            _notification = notification;
         } 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using IISManager.Commands;
 using Microsoft.Web.Administration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,19 +17,24 @@ namespace IISManager.ViewModels
         private ServerManager _serverManager;
         private Application _application;
         private ApplicationPool _applicationPool;
-        
+        private Notification _notification;
+
+
         public ApplicationInfo Info { get; set; }
         public ICommand OnAppPoolStartButtonClickedEventHandler
         {
             get
             {
                 return onAppPoolStartButtonClickedEventHandler ?? (onAppPoolStartButtonClickedEventHandler = new CommandExecutor(() =>
-                {
+                {                   
                     if (_applicationPool.State == ObjectState.Stopped)
                     {
-                        _applicationPool.Start();
-                        Info.ApplicationPoolStatus = string.Empty;
-                    }
+                        ExecuteWithNotification(() =>
+                        {
+                            _applicationPool.Start();
+                            Info.ApplicationPoolStatus = string.Empty;
+                        });
+                    }   
                 }));
             }
         }
@@ -37,12 +43,15 @@ namespace IISManager.ViewModels
             get
             {
                 return onAppPoolStopButtonClickedEventHandler ?? (onAppPoolStopButtonClickedEventHandler = new CommandExecutor(() =>
-                {
-                    if(_applicationPool.State == ObjectState.Started)
+                {                    
+                    if (_applicationPool.State == ObjectState.Started)
                     {
-                        _applicationPool.Stop();
-                        Info.ApplicationPoolStatus = string.Empty;
-                    }
+                        ExecuteWithNotification(() =>
+                        {
+                            _applicationPool.Stop();
+                            Info.ApplicationPoolStatus = string.Empty;
+                        });
+                    }                    
                 }));
             }
         }
@@ -52,14 +61,15 @@ namespace IISManager.ViewModels
             {
                 return onAppPoolRecycleButtonClickedEventHandler ?? (onAppPoolRecycleButtonClickedEventHandler = new CommandExecutor(() =>
                 {
-                    _applicationPool.Recycle();
+                    ExecuteWithNotification(() => _applicationPool.Recycle());                    
                 }));
             }
         }
 
         public ApplicationManagerViewModel(
             ServerManager serverManager,
-            Application application)
+            Application application,
+            Notification notification)
         {
             _serverManager = serverManager;
             _application = application;
@@ -68,7 +78,23 @@ namespace IISManager.ViewModels
                 ApplicationPools.
                 SingleOrDefault(appPool => appPool.Name == _application.ApplicationPoolName);
             Info = new ApplicationInfo(_application, _applicationPool);
-        }        
+            _notification = notification;
+        }
+
+
+
+        private void ExecuteWithNotification(Action action)
+        {
+            try
+            {
+                action();
+                _notification.ShowSuccess();
+            }
+            catch (Exception ex)
+            {
+                _notification.ShowError(ex.Message);
+            }
+        }
     }
 
     public class ApplicationInfo : INotifyPropertyChanged
