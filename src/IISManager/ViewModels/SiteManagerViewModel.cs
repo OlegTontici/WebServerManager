@@ -70,12 +70,15 @@ namespace IISManager.ViewModels
             {
                 return onSiteStartButtonClickedEventHandler ?? (onSiteStartButtonClickedEventHandler = new CommandExecutor(() =>
                 {
-                    ExecuteWithNotification(() =>
+                    if(_site.State != ObjectState.Started)
                     {
-                        _site.Start();
+                        ExecuteWithNotification(() =>
+                        {
+                            _site.Start();
 
-                        Status = string.Empty;
-                    });
+                            Status = string.Empty;
+                        });
+                    }
                 }));
             }
         }
@@ -85,12 +88,15 @@ namespace IISManager.ViewModels
             {
                 return onSiteStopButtonClickedEventHandler ?? (onSiteStopButtonClickedEventHandler = new CommandExecutor(() =>
                 {
-                    ExecuteWithNotification(() =>
+                    if(_site.State != ObjectState.Stopped)
                     {
-                        _site.Stop();
+                        ExecuteWithNotification(() =>
+                        {
+                            _site.Stop();
 
-                        Status = string.Empty;
-                    });
+                            Status = string.Empty;
+                        });
+                    }
                 }));
             }
         }
